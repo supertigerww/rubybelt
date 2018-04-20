@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Organization details</title>
+</head>
+<body>
+    <a href = "/groups">Dashboard</a>
+    <div class="wrapper">
+        <h2><%=@current_organization.name%></h2>
+        <% unless @ids.include? @current_organization.id%>
+        <button><a href="/join/<%=@current_organization.id%>">Join Group</a></button><br><br><br>
+        <% else %>
+        <button><a href="/leave/<%=@current_organization.id%>" data-method="delete">Leave Group</a></button><br><br><br>
+        <% end %>
+
+        <%=@current_organization.description%>
+        <% if @current_organization.user.id == session[:user_id] %>
+        <p>Created by: YOU <button><a href="/groups/<%=@current_organization.id%>" data-method="delete">Delete Group</a></button><br><br></p>
+        <% else %>
+        <p>Created by: <%=@current_organization.user.first_name%> <%=@current_organization.user.last_name%><br><br></p>
+        <% end %>
+        <p>Members:</p>
+        <% @current_organization.joiners.each do |joiner| %>
+        <%= joiner.first_name%> <%= joiner.last_name%><br>
+        <% end %>
+    </div>
+</body>
+</html>

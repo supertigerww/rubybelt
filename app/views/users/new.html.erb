@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login or Registration</title>
+</head>
+<body>
+    <div class="container">
+        
+        <h3>Register</h3>
+        <form action ="/users" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            First name:<input type="text" name="user[first_name]" placeholder="First Name" class="form-control"><br>
+            Last name:<input type="text" name="user[last_name]" placeholder="Last Name" class="form-control"><br>
+            Email:<input type="text" name="user[email]" placeholder="Email" class="form-control"><br>
+            Password:<input type="password" name="user[password]" placeholder="Password" class="form-control"><br>
+            <input type="submit" value="Register"> 
+        </form>
+
+        <h3>Login</h3>
+        <form action="/sessions" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            Email:<input type="text" name="login[email]" placeholder="Email" class="form-control"><br>
+            Password:<input type="password" name="login[password]" placeholder="Password" class="form-control"><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>

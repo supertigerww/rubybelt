@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Organizations</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h4>Hi <%=current_user.first_name%> <%=current_user.last_name%>!</h4>
+
+        <h4>Here are the organizations you may join</h4>
+
+        <% @all_organizations.each do |organization| %>
+        <a href="/groups/<%=organization.id%>"><%=organization.name%></a><br>
+        Member: <%=organization.joiners.length%><br>
+        Description: <%=organization.description%><br><br>
+        <% end %>
+
+        <div class="organization_form">
+            <form action="/groups" method="post">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <p>Create a new organization:</p>
+                Org Name:<input type="text", name="organization[name]", placeholder="Origanization Name"><br>
+                Description:<br><textarea rows="5" cols="50" name="organization[description]"></textarea><br>
+                <input type="hidden" name="organization[user_id]" value="<%=current_user.id%>"> 
+                <input type="submit" value="Create">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
